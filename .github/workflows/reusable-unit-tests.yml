@@ -1,13 +1,19 @@
+name: Reusable unit tests
+
 on:
   workflow_call:
     inputs:
       python_versions:
         required: false
-        default: '[3.9]'
         type: string
+        default: '["3.9"]'
       coverage:
         required: false
         type: boolean
+      pytest_args:
+        required: false
+        type: string
+        default: ''
     secrets:
       CODECOV_TOKEN:
         description: 'Codecov token for coverage (required if coverage is true)'
@@ -19,7 +25,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: ${{ fromJson(inputs.python_versions) }}
+        python-version: ${{ fromJSON(inputs.python_versions) }}
 
     steps:
       - uses: actions/checkout@v2
@@ -50,13 +56,11 @@ jobs:
         run: |
           poetry run pre-commit run --all-files
       - name: Test with pytest
-        if: ${{ inputs.coverage }}
+        env:
+          COVERAGE_ARGS: ${{ fromJSON('["--cov-report=xml:.coverage.xml", ""]')[inputs.coverage] }}
+          EXTRA_ARGS: ${{ inputs.pytest_args }}
         run: |
-          poetry run py.test --cov-report=xml:.coverage.xml
-      - name: Test with pytest
-        if: ${{ !inputs.coverage }}
-        run: |
-          poetry run py.test
+          poetry run py.test $COVERAGE_ARGS $EXTRA_ARGS
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v2
         if: ${{ inputs.coverage }}
