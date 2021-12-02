@@ -60,7 +60,7 @@ jobs:
           COVERAGE_ARGS: ${{ fromJSON('["--cov-report=xml:.coverage.xml", ""]')[inputs.coverage] }}
           EXTRA_ARGS: ${{ inputs.pytest_args }}
         run: |
-          poetry run py.test $COVERAGE_ARGS $EXTRA_ARGS
+          poetry run py.test "$COVERAGE_ARGS" "$EXTRA_ARGS"
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v2
         if: ${{ inputs.coverage }}
