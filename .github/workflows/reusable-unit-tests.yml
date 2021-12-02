@@ -10,6 +10,10 @@ on:
       coverage:
         required: false
         type: boolean
+      poetry_args:
+        required: false
+        type: string
+        default: ''
       pytest_args:
         required: false
         type: string
@@ -57,7 +61,7 @@ jobs:
             venv-${{ matrix.python-version }}-
       - name: Install dependencies
         run: |
-          poetry install -v
+          poetry install -v --remove-untracked --no-interaction ${{ inputs.poetry_args }}
       - name: Post install dependencies
         if: ${{ inputs.post_install }}
         run: |
