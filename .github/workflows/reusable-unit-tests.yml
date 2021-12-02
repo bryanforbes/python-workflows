@@ -57,7 +57,7 @@ jobs:
           poetry run pre-commit run --all-files
       - name: Test with pytest
         env:
-          COVERAGE_ARGS: ${{ fromJSON('["--cov-report=xml:.coverage.xml", ""]')[inputs.coverage] }}
+          COVERAGE_ARGS: ${{ fromJSON('["", "--cov-report=xml:.coverage.xml"]')[inputs.coverage] }}
           EXTRA_ARGS: ${{ inputs.pytest_args }}
         run: |
           poetry run py.test "$COVERAGE_ARGS" "$EXTRA_ARGS"
