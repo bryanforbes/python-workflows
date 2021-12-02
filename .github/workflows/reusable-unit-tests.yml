@@ -14,6 +14,10 @@ on:
         required: false
         type: string
         default: ''
+      post_install:
+        required: false
+        type: string
+        default: ''
     secrets:
       CODECOV_TOKEN:
         description: 'Codecov token for coverage (required if coverage is true)'
@@ -52,6 +56,10 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install -v
+      - name: Post install dependencies
+        if: ${{ inputs.post_install }}
+        run: |
+          ${{ inputs.post_install }}
       - name: Pre-commit checks
         run: |
           poetry run pre-commit run --all-files
