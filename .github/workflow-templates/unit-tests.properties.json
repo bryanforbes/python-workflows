@@ -1,0 +1,8 @@
+{
+  "name": "Unit tests",
+  "description": "Unit test workflow template.",
+  "categories": ["Python"],
+  "filePatterns": [
+    "pyproject.toml$"
+  ]
+}

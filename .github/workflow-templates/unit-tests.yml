@@ -1,0 +1,30 @@
+name: Unit tests
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+
+jobs:
+  build:
+    uses: bryanforbes/python-workflows/.github/workflows/reusable-unit-tests.yml@master
+    with:
+      # A JSON string containing an array of strings of Python versions
+      # python_versions: '["3.9"]'
+
+      # A string of arguments to pass to poetry (such as '--extras dev')
+      # poetry_args: ''
+
+      # A string containing a script to run after `poetry install` finishes
+      # post_install: './fix-site-packages.sh'
+
+      # A string of arguments to pass to py.test (such as '-n0 --dist=no')
+      # pytest_args: ''
+
+      # Whether to upload coverage
+      # This requires the codecov token to be added to the secrets in the repository
+      # settings (as CODECOV_TOKEN) and uncommenting the secrets entry below
+      # coverage: true
+    secrets:
+      # Required if coverage is set to `true` above
+      # CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
