@@ -61,7 +61,7 @@ jobs:
             venv-${{ matrix.python-version }}-
       - name: Install dependencies
         run: |
-          poetry install -v --remove-untracked --no-interaction ${{ inputs.poetry_args }}
+          poetry install -v --sync --no-interaction ${{ inputs.poetry_args }}
       - name: Post install dependencies
         if: ${{ inputs.post_install }}
         run: |
