@@ -50,7 +50,7 @@ jobs:
           virtualenvs-in-project: true
           virtualenvs-path: .venv
       - name: Cache Poetry virtualenv
-        uses: actions/cache@v3.0.11
+        uses: actions/cache@v3.2.1
         env:
           cache-name: venv-cache
         with:
