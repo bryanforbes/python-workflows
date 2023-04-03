@@ -2,9 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "Renovate presets for my python applications",
   "extends": [
-    "github>bryanforbes/python-workflows",
-    "github>bryanforbes/python-workflows:group-and-pin-dev-deps",
-    "github>bryanforbes/python-workflows:daily-lockfile"
+    "github>bryanforbes/python-workflows"
   ],
   "rangeStrategy": "pin"
 }
