@@ -1,0 +1,12 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Base Renovate presets for my python projects",
+  "extends": [
+    "config:base",
+    "schedule:daily",
+    ":enablePreCommit",
+    ":assignee(bryanforbes)",
+    ":timezone(America/Chicago)",
+    ":combinePatchMinorReleases"
+  ]
+}
