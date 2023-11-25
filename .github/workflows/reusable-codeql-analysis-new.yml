@@ -15,6 +15,10 @@ on:
         required: false
         type: string
         default: ''
+      category:
+        required: false
+        type: string
+        default: ''
 
 jobs:
   analyze:
@@ -76,3 +80,5 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
+        with:
+          category: ${{ inputs.category }}
