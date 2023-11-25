@@ -39,6 +39,7 @@ jobs:
 
       - name: Restore Poetry virtualenv
         uses: actions/cache/restore@v3
+        id: cache
         env:
           cache-name: venv-cache
         with:
