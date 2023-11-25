@@ -1,0 +1,77 @@
+name: "Code scanning - action"
+
+on:
+  workflow_call:
+    inputs:
+      python_version:
+        required: false
+        type: string
+        default: '3.11'
+      poetry_args:
+        required: false
+        type: string
+        default: ''
+      post_install:
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ inputs.python_version }}
+
+      - name: Restore Poetry virtualenv
+        uses: actions/cache/restore@v3
+        env:
+          cache-name: venv-cache
+        with:
+          path: .venv
+          key: venv-${{ inputs.python_version }}-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            venv-${{ inputs.python_version }}-${{ hashFiles('poetry.lock') }}
+            venv-${{ inputs.python_version }}-
+
+      - name: Install Poetry
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: snok/install-poetry@v1.3
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          virtualenvs-path: .venv
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          poetry install -v --sync --no-interaction ${{ inputs.poetry_args }}
+
+      - name: Post install dependencies
+        if: ${{ steps.cache.outputs.cache-hit != 'true' && inputs.post_install }}
+        run: |
+          ${{ inputs.post_install }}
+
+      # Initializes the CodeQL tools for scanning.
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: python
+          setup-python-dependencies: false
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
