@@ -42,7 +42,7 @@ jobs:
           python-version: ${{ inputs.python_version }}
 
       - name: Restore Poetry virtualenv
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         id: cache
         env:
           cache-name: venv-cache
