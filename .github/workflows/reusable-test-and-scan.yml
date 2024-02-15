@@ -121,7 +121,7 @@ jobs:
           poetry run py.test ${{ inputs.pytest_args }} ${{ fromJSON('["", "--cov-report=xml:.coverage.xml"]')[inputs.coverage] }}
 
       - name: Upload coverage to codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v3
         if: ${{ inputs.coverage }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
