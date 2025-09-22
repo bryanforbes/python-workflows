@@ -1,10 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    "schedule:daily",
-    ":assignee(bryanforbes)",
-    ":timezone(America/Chicago)"
+    "github>bryanforbes/renovate-presets:config-default.json5"
   ],
   "configMigration": true
 }

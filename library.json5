@@ -1,8 +1,0 @@
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Renovate presets for my python libraries",
-  "extends": [
-    "github>bryanforbes/python-workflows:default.json5"
-  ],
-  "rangeStrategy": "update-lockfile"
-}
