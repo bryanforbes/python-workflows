@@ -41,7 +41,7 @@ jobs:
       scan: ${{ steps.filter.outputs.scan }}
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Python ${{ inputs.python_version }}
         uses: actions/setup-python@v6
@@ -87,7 +87,7 @@ jobs:
       PYTHON: ${{ inputs.python_version }}
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Python ${{ inputs.python_version }}
         uses: actions/setup-python@v6
@@ -145,7 +145,7 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Python ${{ inputs.python_version }}
         uses: actions/setup-python@v6
