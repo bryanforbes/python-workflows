@@ -56,7 +56,7 @@ jobs:
           virtualenvs-path: .venv
 
       - name: Cache Poetry virtualenv
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         env:
           cache-name: venv-cache
         with:
@@ -102,7 +102,7 @@ jobs:
           virtualenvs-path: .venv
 
       - name: Restore Poetry virtualenv
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         env:
           cache-name: venv-cache
         with:
@@ -153,7 +153,7 @@ jobs:
           python-version: ${{ inputs.python_version }}
 
       - name: Restore Poetry virtualenv
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         env:
           cache-name: venv-cache
         with:
